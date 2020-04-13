@@ -16,7 +16,7 @@ correr el sgt comando en python cuando se tenga activo el ambiente de python 3.6
 
 pip install -r requeriments.tx
 
-El credentials es donde debes poner tus credenciales de Instagram
+El file credentials.json es donde debes poner tus credenciales de Instagram
 
 Ejecutar el file bot.py para iniciar el programa
 
@@ -32,7 +32,7 @@ Guardar el .sh y ejecutar en la consola de linux:
 crontab -e
 
 Ingresar en la ventana el comando:
-#10 08 * * * /home/ubuntu/cursoPythonInstagram2.0/bash.sh
+10 08 * * * /home/ubuntu/cursoPythonInstagram2.0/bash.sh
 
 Teclear  Ctrl + X y despues yes
 
