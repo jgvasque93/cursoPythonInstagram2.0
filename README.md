@@ -1,6 +1,9 @@
 # curso Python Instagram2.0
 Un curso mejor desarrollado para python e instagram, en donde explico como usar el api de instagram combinado con el scraping a los endpoints de esta platafroma.
 
+Link a dispositiva:
+https://docs.google.com/presentation/d/1d2gcfhLExH6kZJMKlxjthMggijqhpyDDbwJDrcaMbzQ/edit?usp=sharing
+
 Como usarlo ?
 Descarga el proyecto de github
 
@@ -14,7 +17,7 @@ Para este proyecto usamos python 3.6
 
 correr el sgt comando en python cuando se tenga activo el ambiente de python 3.6
 
-pip install -r requeriments.tx
+pip install -r requeriments.txt
 
 El file credentials.json es donde debes poner tus credenciales de Instagram
 
