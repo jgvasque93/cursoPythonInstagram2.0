@@ -17,7 +17,7 @@ Para este proyecto usamos python 3.6
 
 correr el sgt comando en python cuando se tenga activo el ambiente de python 3.6
 
-pip install -r requeriments.tx
+pip install -r requeriments.txt
 
 El file credentials.json es donde debes poner tus credenciales de Instagram
 
