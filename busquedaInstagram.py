@@ -12,7 +12,7 @@ def getDataframe(valuesSettings):
     #df['Division']=df['Division'].str.title()
     return df.reset_index(drop=True)
 
-def main(session,head,TIPO,PARAMQUERY):
+def busquedaInstagram(session,head,TIPO,PARAMQUERY):
     session,head=loginInstagram(username,pwd)
     try:
         urlScraping='https://www.instagram.com/web/search/topsearch/?context=TIPO&query=PARAMQUERY'

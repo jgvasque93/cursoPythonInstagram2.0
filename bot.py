@@ -5,6 +5,7 @@ from getRecentActivity import *
 from getInfoUser import *
 from funtionsApiInstagram import *
 from getSuggested import *
+from busquedaInstagram import *
 
 import json
 import pandas as pd
@@ -19,7 +20,6 @@ jsonData=readCredentilas()
 session,head=login_Instagram_Session(jsonData['user'],jsonData['password'])
 API=login_Instagram_Api(jsonData['user'],jsonData['password'])
 #Buscar followers
-mainMms=', visit my course on instagram about instagram scraping and use of instagram api https://www.youtube.com/playlist?list=PLycDrvqd1SopapyX8wApU3mtcwWq3mw43'
 hashtag=['pythoncode','programing','tech','cursopython','programingpython']
 results=[]
 for xhashtag in hashtag:
@@ -34,10 +34,9 @@ for indice_fila, fila in resultsHashtags.iterrows():
 		pastPosts.append(posts)
 		text='good posts about '+fila['tagname']+mainMms
 		print(posts)
-		commentPosts(API,fila['idpost'],text)
 		likePost(API,fila['idpost'])
 		#importante esperar 60 segundos para que instgram no te bloquee esta opcion
-		time.sleep(60)
+		time.sleep(120)
 
 try:
 	dataOld=pd.read_csv("idsOld.csv", sep=';')
