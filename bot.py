@@ -32,10 +32,9 @@ for indice_fila, fila in resultsHashtags.iterrows():
 	posts=fila['shortcode']
 	if(posts not in pastPosts):
 		pastPosts.append(posts)
-		text='good posts about '+fila['tagname']+mainMms
 		print(posts)
 		likePost(API,fila['idpost'])
-		#importante esperar 60 segundos para que instgram no te bloquee esta opcion
+		#importante esperar 120 segundos para que instgram no te bloquee esta opcion
 		time.sleep(120)
 
 try:
@@ -52,8 +51,8 @@ for xids in ids:
 	if(xids not in idsFollow):
 		idsFollow.append(xids)
 		follow(API,xids)
-		#importante esperar 60 segundos para que instgram no te bloquee esta opcion
-		time.sleep(65)
+		#importante esperar 120 segundos para que instgram no te bloquee esta opcion
+		time.sleep(120)
 results=getActivityRecent(session,head)
 results=results[(results['__typename']!='GraphFollowAggregatedStory')].copy().reset_index(drop=True)
 ids=results['id'].tolist()
@@ -62,8 +61,8 @@ for xids in ids:
 	if(str(xids) not in idsFollow):
 		idsFollow.append(str(xids))
 		follow(API,xids)
-		#importante esperar 60 segundos para que instgram no te bloquee esta opcion
-		time.sleep(65)
+		#importante esperar 120 segundos para que instgram no te bloquee esta opcion
+		time.sleep(120)
 
 
 results=getTimeline(API,jsonData['user'],5)

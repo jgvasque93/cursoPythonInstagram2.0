@@ -13,7 +13,6 @@ def getDataframe(valuesSettings):
     return df.reset_index(drop=True)
 
 def busquedaInstagram(session,head,TIPO,PARAMQUERY):
-    session,head=loginInstagram(username,pwd)
     try:
         urlScraping='https://www.instagram.com/web/search/topsearch/?context=TIPO&query=PARAMQUERY'
         has_next_page = 'true'
