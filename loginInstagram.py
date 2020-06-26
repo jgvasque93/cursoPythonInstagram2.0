@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 #
-from InstagramAPI import InstagramAPI
 import requests
-
-
+import json
+#las credenciales van en el file credentials.json , se agrego un nuevo campo para el login con requests
+#El nuevo campo se llama enc_password, el cual lo tienes que extraer desde un navegador web , 
+# aqui el video donde lo explico : 
 def login_Instagram_Session(usernameD,paswordD):
     baseUrl='https://www.instagram.com/'
     loginUrl=baseUrl+'accounts/login/ajax/'
@@ -16,13 +17,10 @@ def login_Instagram_Session(usernameD,paswordD):
     session.headers.update({'Referer':baseUrl})
     req=session.get(baseUrl)
     session.headers.update({'X-CSRFToken':req.cookies['csrftoken']})
-    login_data={'username':username,'password':pasword}
+    login_data={'username':username,'enc_password':pasword}
     login=session.post(loginUrl,data=login_data,allow_redirects=True)
     session.headers.update({'X-CSRFToken':login.cookies['csrftoken']})
+    print(login.text)
     cookies=login.cookies
     return session,head
-def login_Instagram_Api(usernameD,paswordD):
-    API = InstagramAPI(usernameD,paswordD)
-    API.login()
-    return API
 

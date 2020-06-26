@@ -16,7 +16,7 @@ def timestampToPTtime(created_utc):
     return datetimePT
 
 
-def getPostsbyHashtag(session,head,API,hashtag,quantity):
+def getPostsbyHashtag(session,head,hashtag,quantity):
     topics_dict = {
             "tagname":[], 
             "pk":[], 
