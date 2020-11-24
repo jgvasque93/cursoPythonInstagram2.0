@@ -1,0 +1,75 @@
+Extraer Comentarios, likes y views de un Live en Instagram
+
+Paso 1: Crear un nuevo ambiente
+conda create -n live2 python=3.5
+
+Paso 2:Instalar la libreria PyInstaLive
+https://github.com/dvingerh/PyInstaLive
+pip install git+https://github.com/notcammy/PyInstaLive.git@3.2.4
+
+Paso 3: Instalar ffmpeg
+https://github.com/BtbN/FFmpeg-Builds/releases
+ffmpeg-N-99980-g9208b72a38-win64-gpl-shared.zip
+
+variable de entorno : C:\Users\User\ffmpeg\bin
+
+
+Paso 4: Si resulta error al momento de guardar el video , buscar el la libreria instagram_private_api_extension 
+el file live.py y añadir estas lineas en la funcion stitch
+C:\Users\User\Anaconda3\envs\live\Lib\site-packages\instagram_private_api_extensions
+
+
+	for key in self.segment_meta:
+				self.segment_meta[key.split('?')[0]] = self.segment_meta.pop(key)
+
+Paso 5: Sustituir la funcion generate_json_segments , en la libreria pyinstalive en el file helpers.py por este codigo
+C:\Users\User\Anaconda3\envs\live\Lib\site-packages\pyinstalive
+def generate_json_segments():
+    info=[]
+
+    sliceTime=8
+    while True:
+        pil.livestream_obj['delay'] = (int(pil.epochtime) - pil.livestream_obj['published_time'])
+        if 'initial_buffered_duration' not in pil.livestream_obj and pil.broadcast_downloader.initial_buffered_duration:
+            pil.livestream_obj['initial_buffered_duration'] = pil.broadcast_downloader.initial_buffered_duration
+        pil.livestream_obj['segments'] = pil.broadcast_downloader.segment_meta
+        try:
+
+
+
+            if(sliceTime==0):
+                broadcast_like = pil.ig_api.broadcast_like_count(pil.livestream_obj.get('id'),int(time.time()))
+                broadcast_view = pil.ig_api.broadcast_heartbeat_and_viewercount(pil.livestream_obj.get('id'))
+                broadcast = pil.livestream_obj.copy()
+                broadcast.pop('segments', None)
+
+                json_dataInfo={
+                'likes':broadcast_like['likes'],
+                'views':broadcast_view['viewer_count'],
+                'time':int(broadcast_like['like_ts'])-int(broadcast['published_time'])
+                }
+                info.append(json_dataInfo)
+
+                sliceTime=8
+
+                broadcast['info'] = info
+                with open(pil.live_folder_path.replace('downloads','') + "metrics.json", 'w') as outfile:
+                    json.dump(broadcast, outfile, indent=2)
+            else:
+                sliceTime=sliceTime-1
+
+
+            with open(pil.live_folder_path + ".json", 'w') as json_file:
+                json.dump(pil.livestream_obj, json_file, indent=2)
+            if not pil.broadcast_downloader.stream_id:
+                pil.broadcast_downloader.stream_id = pil.livestream_obj['id']
+            #check_if_guesting()
+            if pil.kill_segment_thread:
+                break
+            else:
+                time.sleep(2.5)
+        except Exception as e:
+            logger.warn(str(e))
+Paso 6: Testear Codigo
+
+asiapolar90	testlive
